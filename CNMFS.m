@@ -1,4 +1,4 @@
-function [W1,W2,H1,H2,kernelsize,freq,index,R] = CNMFS(input,L,mu,alpha,fs)
+function [W1,W2,H1,H2] = CNMFS(input,L,mu,alpha,fs)
 %Inputs:
 % Input is the music vector that we're working with (a 1D column vector)
 % L is the overcompleteness parameter
@@ -14,10 +14,10 @@ function [W1,W2,H1,H2,kernelsize,freq,index,R] = CNMFS(input,L,mu,alpha,fs)
 
 input = (input-mean(input))/std(input);     %Normalize the input
 
-[length_input,width_input] = size(input);   %Take size to find dimensions of H and W
+[length_input,width_input] = size(input);
 
 %Silverman's Rule
-kernelsize(1:L*length_input/2) = 1.06*iqr(input)/1.34*power(length(input),-1/5);    %Check this!!!
+kernelsize(1:L*length_input/2) = 1.06*iqr(input)/1.34*power(length(input),-1/5)
 
 %Compute autocorrentropy function of the input
 R = autocorrentropy_vector_new(input,kernelsize(1));
@@ -41,8 +41,6 @@ W = [W1,W2];    %Combine dictionary matrices
 H = W'*R;   %Initialize total coefficient matrix
 H1 = H(1:L*length_input/2,:);
 H2 = H(L*length_input/2+1:end,:);
-
-%Initialize matrices
 
 
 %Now optimize!!!
