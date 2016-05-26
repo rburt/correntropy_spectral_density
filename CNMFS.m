@@ -11,6 +11,8 @@ function [W1,W2,H1,H2] = CNMFS(input,L,mu,alpha,fs)
 % H1 are the frequency coefficients
 % H2 are the noise coefficients
 
+%% THIS VERSION DOES NOT ADAPT THE KERNEL SIZE
+
 
 input = (input-mean(input))/std(input);     %Normalize the input
 
