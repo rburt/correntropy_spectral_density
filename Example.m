@@ -34,4 +34,4 @@ for note = 1:35;
 
 end
 
-sum(count)
+sum(count)/length(count)
